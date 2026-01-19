@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build OpenGL",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "src/main.cpp",
+        "src/glad.c",
+        "-std=c++17",
+        "-Iinclude",
+        "-Llib",
+        "-l:libglfw3.a",
+        "-lopengl32",
+        "-lgdi32",
+        "-luser32",
+        "-lshell32",
+        "-lwinmm",
+        "-o",
+        "app.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
+
+
