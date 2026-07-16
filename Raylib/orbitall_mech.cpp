@@ -49,8 +49,7 @@ void Calculate_gravity(planet &a, planet &b)
     // Acceleration of planet A
     a.acceleration.x = g_forceX / m1;
     a.acceleration.y = g_forceY / m1;
-
-    // Acceleration of planet B
+    // Acceleration o planet B
     b.acceleration.x = -g_forceX / m2;
     b.acceleration.y = -g_forceY / m2;
 }
@@ -62,15 +61,26 @@ int main(){
  const float width = 1920;
  InitWindow(width , height , "orbital_mechanics");
 
- planet exo(1000.0, 15.0 , {600, 450} , {-150,150} ,{0,0}, BLUE);
- planet neo(1000.0, 15.0 , {1200, 450} , {150,-150} ,{0,0}, BLUE);
+ planet exo(1000.0, 15.0 , {600, 450} ,{150,-150} ,{0,0}, BLUE);
+ planet neo(1000.0, 15.0 , {1200, 450},{-150,150} ,{0,0}, BLUE);
+//  planet ren(1000.0 ,15.0 , { 900 , 900},{+150,-150} ,{0,0}, BLUE);
 //  planet zeta(1000.0 ,15.0 , {})
  
  
  while(!WindowShouldClose()){
      float dt = GetFrameTime();
+
+     exo.acceleration = {0,0};
+    //  ren.acceleration = {0,0};
+     neo.acceleration = {0,0};
+    
      ClearBackground(BLACK);
      Calculate_gravity(exo , neo);
+    //  Calculate_gravity(exo , ren);
+    //  Calculate_gravity(neo , ren);
+
+
+
      if (dt > 0.0f && dt < 0.1f) {
          exo.velocity.x += exo.acceleration.x * dt;
          exo.velocity.y += exo.acceleration.y * dt;
@@ -81,10 +91,16 @@ int main(){
          neo.velocity.y += neo.acceleration.y * dt;
          neo.position.x += neo.velocity.x * dt;
          neo.position.y += neo.velocity.y * dt;
-}
+        //  --------------------------------------------
+        // ren.velocity.x += ren.acceleration.x * dt;
+        // ren.velocity.y += ren.acceleration.y * dt;
+        // ren.position.x += ren.velocity.x * dt;
+        // ren.position.y += ren.velocity.y*dt;
+}       
     BeginDrawing();
     DrawCircleV(exo.position , exo.radius , exo.color);
     DrawCircleV(neo.position, neo.radius , neo.color);
+    // DrawCircleV(ren.position , ren.radius , ren.color);
     EndDrawing();
 
 }
