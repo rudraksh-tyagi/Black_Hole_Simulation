@@ -82,13 +82,16 @@ int main(){
     float const height = 1080;
     
     InitWindow(width , height , "5 body simulation");
+    vector<Vector2> grah;
     planet sun  (100000.0, 40.0, {960,540}, {0,0}, {0,0}, YELLOW);
     planet exo  (1.0, 10.0, {960,390}, {236,0},  {0,0}, BLUE);
     planet neo  (1.0, 10.0, {700,540}, {0,-196}, {0,0}, RED);
     planet erid (1.0, 10.0, {1360,540},{0,158},  {0,0}, ORANGE);
     planet ren  (1.0, 10.0, {960,1040},{141,0},  {0,0}, GREEN);
+    int frameCounter = 0;
+    // for(int )
 while(!WindowShouldClose()){
-        
+        frameCounter++;
         
     float dt= GetFrameTime();
     sun.acceleration = {0,0};
@@ -117,28 +120,31 @@ while(!WindowShouldClose()){
         
         if (dt > 0.0f && dt < 0.1f) {
          update_position(exo,dt);
-         exo.trail.push_back(exo.position);
-         //  -------------------------------------------
-         update_position(neo,dt);
-         neo.trail.push_back(neo.position);
-         //  --------------------------------------------
-         update_position(ren,dt);
-         ren.trail.push_back(ren.position);
-         // ---------------------------------------------
          update_position(erid,dt);
-         erid.trail.push_back(erid.position);
+         update_position(neo,dt);
+         update_position(ren,dt);
+        
+        // exo.trail.push_back(exo.position);
+        // neo.trail.push_back(neo.position);
+        // ren.trail.push_back(ren.position);
+        // erid.trail.push_back(erid.position);
+
+
+         
     }  
     BeginDrawing();
     ClearBackground(BLACK);
-        DrawTrail(exo);
-        DrawTrail(ren);
-        DrawTrail(neo);
-        DrawTrail(erid);
+        // DrawTrail(exo);
+        // DrawTrail(ren);
+        // DrawTrail(neo);
+        // DrawTrail(erid);
         DrawCircleV(exo.position , exo.radius , exo.color);
         DrawCircleV(neo.position , neo.radius , neo.color);
         DrawCircleV(ren.position , ren.radius , ren.color);
         DrawCircleV(erid.position , erid.radius , erid.color);
         DrawCircleV(sun.position , sun.radius , sun.color);
+        DrawFPS(10,10);
+
         EndDrawing();
     }
     return 0;

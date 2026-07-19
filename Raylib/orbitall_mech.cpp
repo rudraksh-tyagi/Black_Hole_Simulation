@@ -104,5 +104,6 @@ int main(){
     EndDrawing();
 
 }
+CloseWindow();
 return 0;
 }
